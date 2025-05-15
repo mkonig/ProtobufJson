@@ -1,7 +1,9 @@
 UNAME_S := $(shell uname -s)
 
-CXXFLAGS ?= -I/usr/include
-LDLIBS ?= /usr/lib/x86_64-linux-gnu/libprotobuf.a
+CXXFLAGS += -I/usr/include
+ifndef IN_NIX
+	LDLIBS += /usr/lib/x86_64-linux-gnu/libprotobuf.a
+endif
 
 ifeq ($(UNAME_S),Linux)
 	LDLIBS += -lstdc++fs -pthread
