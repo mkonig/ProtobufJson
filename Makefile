@@ -1,5 +1,6 @@
 UNAME_S := $(shell uname -s)
 
+CC = g++
 CXXFLAGS += -I/usr/include
 ifndef IN_NIX
 	LDLIBS += /usr/lib/x86_64-linux-gnu/libprotobuf.a
@@ -15,7 +16,7 @@ JsonToProto: ProtoToJson
 	ln -f "$<" "$@"
 
 ProtoToJson: ProtobufJson.cc
-	g++ -std=c++17 -g -o "$@" ProtobufJson.cc $(CXXFLAGS) $(LDFLAGS) $(LDLIBS)
+	$(CC) -std=c++17 -g -o "$@" ProtobufJson.cc $(CXXFLAGS) $(LDFLAGS) $(LDLIBS)
 
 clean:
 	rm -f JsonToProto ProtoToJson
