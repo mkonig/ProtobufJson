@@ -17,7 +17,7 @@
         {
           packages = rec {
             default = protobufjson;
-            protobufjson = pkgs.stdenv.mkDerivation
+            protobufjson = pkgs.clangStdenv.mkDerivation
               {
                 pname = "${packageName}";
                 version = "${version}";
@@ -25,12 +25,12 @@
                 nativeBuildInputs = with pkgs; [
                   gcc
                   gnumake
-                  protobuf_28
+                  protobuf_21
                   abseil-cpp
                 ];
                 buildInputs = with pkgs; [
                   pkg-config
-                  protobuf_28
+                  protobuf_21
                   abseil-cpp
                 ];
 

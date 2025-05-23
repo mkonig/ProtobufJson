@@ -10,8 +10,7 @@
 #include <google/protobuf/descriptor.h>
 #include <google/protobuf/util/json_util.h>
 #include <google/protobuf/dynamic_message.h>
-#include <absl/strings/escaping.h>
-#include <absl/status/status.h>
+#include <google/protobuf/stubs/strutil.h>
 
 using namespace google::protobuf::compiler;
 using namespace google::protobuf::util;
@@ -20,8 +19,7 @@ using google::protobuf::FileDescriptorSet;
 using google::protobuf::Descriptor;
 using google::protobuf::DynamicMessageFactory;
 using google::protobuf::Message;
-using absl::Base64Unescape;
-using absl::Status;
+using google::protobuf::Base64Unescape;
 using google::protobuf::DescriptorPool;
 
 /**
@@ -379,7 +377,7 @@ int main(int argc, char** argv){
 
   class ErrorReporter: public MultiFileErrorCollector {
     public:
-      virtual void RecordError(absl::string_view filename, int line, int column, absl::string_view message) {
+      virtual void AddError(const std::string & filename, int line, int column, const std::string & message) {
         std::cerr << "Error occured for " << filename << ":" << line << ":" <<
           column  << " " << message << std::endl;
       }
@@ -486,8 +484,8 @@ int main(int argc, char** argv){
 
     std::string jsonOutput;
     JsonPrintOptions printOptions;
-    printOptions.preserve_proto_field_names = false;
-    // printOptions.always_print_primitive_fields = false;
+    printOptions.preserve_proto_field_names = true;
+    printOptions.always_print_primitive_fields = false;
     printOptions.add_whitespace = true;
     printOptions.always_print_enums_as_ints = false;
     conversionStatus = MessageToJsonString(*message, &jsonOutput, printOptions);
