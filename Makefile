@@ -15,7 +15,7 @@ JsonToProto: ProtoToJson
 	ln -f "$<" "$@"
 
 ProtoToJson: ProtobufJson.cc
-	clang -std=c++17 -g -o "$@" ProtobufJson.cc $(CXXFLAGS) $(LDFLAGS) $(LDLIBS)
+	clang++ -std=c++17 -g -o "$@" ProtobufJson.cc $(CXXFLAGS) $(LDFLAGS) $(LDLIBS)
 
 clean:
 	rm -f JsonToProto ProtoToJson
