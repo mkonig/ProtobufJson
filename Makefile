@@ -1,7 +1,7 @@
-SHELL := /bin/bash
 UNAME_S := $(shell uname -s)
 
 ifndef IN_NIX
+    SHELL := /bin/bash
     CXXFLAGS ?= -Ilib/protobuf-3.21.2/dist/include
     LDLIBS ?= lib/protobuf-3.21.2/dist/lib/libprotobuf.a
 endif
