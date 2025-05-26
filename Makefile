@@ -1,3 +1,4 @@
+SHELL := /bin/bash
 UNAME_S := $(shell uname -s)
 
 ifndef IN_NIX
@@ -19,7 +20,7 @@ ProtoToJson: ProtobufJson.cc  lib/.compile
 
 lib/.compile:
 ifndef IN_NIX
-	sh ./build_dependencies.sh
+	./build_dependencies.sh
 	touch $@
 endif
 
