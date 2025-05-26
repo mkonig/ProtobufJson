@@ -13,7 +13,7 @@ JsonToProto: ProtoToJson
 	ln -f "$<" "$@"
 
 ProtoToJson: ProtobufJson.cc  lib/.compile
-	g++ -std=c++17 -g -o "$@" ProtobufJson.cc $(CXXFLAGS) $(LDFLAGS) $(LDLIBS)
+	clang++ -std=c++17 -g -o "$@" ProtobufJson.cc $(CXXFLAGS) $(LDFLAGS) $(LDLIBS)
 
 lib/.compile:
 	rm -rf lib
