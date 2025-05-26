@@ -21,20 +21,24 @@
               {
                 pname = "${packageName}";
                 version = "${version}";
-                src = ./.;
-                nativeBuildInputs = with pkgs; [
-                  gcc
-                  gnumake
-                  protobuf_21
-                  abseil-cpp
-                ];
+                srcs = ./.;
+                nativeBuildInputs = with pkgs;
+                  [
+                    gcc
+                    gnumake
+                    protobuf_21
+                    abseil-cpp
+                  ];
                 buildInputs = with pkgs; [
                   pkg-config
                   protobuf_21
                   abseil-cpp
+                  curl
                 ];
+                env = {
+                  IN_NIX = 1;
+                };
 
-                dontConfigure = true;
                 buildPhase = ''
                   IN_NIX=1 NIX_LDFLAGS="$(pkg-config --libs protobuf) $NIX_LDFLAGS" NIX_CFLAGS_COMPILE="$(pkg-config --cflags protobuf) $NIX_CFLAGS_COMPILE" make -j $NIX_BUILD_CORES
                 '';

@@ -1,7 +1,9 @@
 UNAME_S := $(shell uname -s)
 
-CXXFLAGS ?= -Ilib/protobuf-3.21.2/dist/include
-LDLIBS ?= lib/protobuf-3.21.2/dist/lib/libprotobuf.a
+ifndef IN_NIX
+    CXXFLAGS ?= -Ilib/protobuf-3.21.2/dist/include
+    LDLIBS ?= lib/protobuf-3.21.2/dist/lib/libprotobuf.a
+endif
 
 ifeq ($(UNAME_S),Linux)
 	LDLIBS += -lstdc++fs -pthread
@@ -16,9 +18,10 @@ ProtoToJson: ProtobufJson.cc  lib/.compile
 	clang++ -std=c++17 -g -o "$@" ProtobufJson.cc $(CXXFLAGS) $(LDFLAGS) $(LDLIBS)
 
 lib/.compile:
-	rm -rf lib
-	./build_dependencies.sh
+ifndef IN_NIX
+	sh ./build_dependencies.sh
 	touch $@
+endif
 
 clean:
 	rm -f JsonToProto ProtoToJson
