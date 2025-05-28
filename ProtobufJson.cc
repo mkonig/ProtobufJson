@@ -484,7 +484,7 @@ int main(int argc, char** argv){
 
     std::string jsonOutput;
     JsonPrintOptions printOptions;
-    printOptions.preserve_proto_field_names = true;
+    printOptions.preserve_proto_field_names = false;
     printOptions.always_print_primitive_fields = false;
     printOptions.add_whitespace = true;
     printOptions.always_print_enums_as_ints = false;
